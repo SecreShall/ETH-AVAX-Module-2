@@ -3,13 +3,23 @@
 
 ## Overview
 
-Assessment is a Solidity smart contract designed to manage a simple account with deposit and withdrawal functionalities. This README focuses on error handling using `require()`, `revert()`, `assert()`, custom errors, and event emission.
+Assessment is a Solidity smart contract designed to manage a simple account with deposit and withdrawal functionalities. This contract allows users to interact with their account balance through secure and controlled operations.
 
 ## Features
 
-- View the current balance.
-- Deposit funds into the account (owner only).
-- Withdraw funds from the account (owner only).
+- **View Balance**: Users can check the current balance of their account.
+- **Deposit**: Owners can deposit funds into the contract.
+- **Withdraw**: Owners can withdraw funds from the contract, with error handling for insufficient balances.
+
+## Functionality
+
+The contract provides basic account management capabilities:
+
+- **Deposit Function**: Owners can deposit ETH into the contract using the `deposit()` function. The deposited amount increases the contract's balance.
+  
+- **Withdraw Function**: Owners can withdraw ETH from the contract using the `withdraw()` function. This function ensures that the withdrawal amount does not exceed the contract's balance and includes error handling for insufficient balances.
+  
+- **View Balance Function**: Users can view the current balance of the contract using the `getBalance()` function.
 
 ## Error Handling
 
