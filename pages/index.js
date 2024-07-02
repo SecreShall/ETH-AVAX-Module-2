@@ -63,7 +63,7 @@ export default function HomePage() {
       if (ethWallet) {
         provider = new ethers.providers.Web3Provider(ethWallet);
       } else {
-        provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
+        provider = new ethers.providers.JsonRpcProvider("https://8545-metacrafterc-scmstarter-ye7rcaudfz6.ws-us114.gitpod.io");
       }
 
       const signer = provider.getSigner();
