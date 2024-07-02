@@ -1,52 +1,50 @@
 <h1 align="center">ETH + AVAX PROOF: Intermediate EVM Course</h1>
 <h1 align="center">Project: Function Frontend</h1>
 
+# ToDoList Smart Contract
+
 ## Overview
 
-Assessment is a Solidity smart contract designed to manage a simple account with deposit and withdrawal functionalities. This contract allows users to interact with their account balance through secure and controlled operations.
+ToDoList is a Solidity smart contract designed to manage tasks with basic CRUD (Create, Read, Update, Delete) operations. Users can create tasks, mark them as completed, and delete them.
 
 ## Features
 
-- **View Balance**: Users can check the current balance of their account.
-- **Deposit**: Owners can deposit funds into the contract.
-- **Withdraw**: Owners can withdraw funds from the contract, with error handling for insufficient balances.
+- Create a new task with a description.
+- Mark a task as completed or incomplete.
+- Delete a task.
 
 ## Functionality
 
-The contract provides basic account management capabilities:
+The contract provides the following functions:
 
-- **Deposit Function**: Owners can deposit ETH into the contract using the `deposit()` function. The deposited amount increases the contract's balance.
-  
-- **Withdraw Function**: Owners can withdraw ETH from the contract using the `withdraw()` function. This function ensures that the withdrawal amount does not exceed the contract's balance and includes error handling for insufficient balances.
-  
-- **View Balance Function**: Users can view the current balance of the contract using the `getBalance()` function.
+- **Create Task**: `createTask(string memory _content)`
+  - Adds a new task with the provided content to the list of tasks.
+  - Emits `TaskCreated(uint id, string content, bool completed)` event.
 
-## Error Handling
+- **Toggle Task Completed**: `toggleTaskCompleted(uint _id)`
+  - Toggles the completion status of a task identified by `_id`.
+  - Emits `TaskCompleted(uint id, bool completed)` event.
 
-### `require(condition, message)`
+- **Delete Task**: `deleteTask(uint _id)`
+  - Deletes the task identified by `_id` from the list of tasks.
+  - Emits `TaskDeleted(uint id)` event.
 
-- **Usage**: Ensures that only the owner can perform certain actions (`deposit()` and `withdraw()`).
-- **Effect**: If `msg.sender` is not equal to `owner`, the function execution will revert with the message "You are not the owner of this account".
+- **Get Task**: `getTask(uint _id) public view returns (uint, string memory, bool)`
+  - Retrieves details of the task identified by `_id`, including its ID, content, and completion status.
 
-### `revert()`
-
-- **Usage**: Used in `withdraw(uint256 _withdrawAmount)` to handle insufficient balance.
-- **Effect**: If the contract balance is less than `_withdrawAmount`, the function execution will revert with a custom error `InsufficientBalance`.
-
-### `assert(condition)`
-
-- **Usage**: Asserts the correctness of the balance after a deposit or withdrawal operation.
-- **Effect**: Verifies that the balance was updated correctly, ensuring the integrity of the contract state.
-
-### Custom Error
-
-- **Usage**: Defined as `InsufficientBalance` to handle specific conditions in `withdraw()`.
-- **Effect**: Custom errors provide clarity on specific failure conditions, improving contract robustness and debugging.
+- **Get Task Count**: `getTaskCount() public view returns (uint)`
+  - Returns the total number of tasks currently stored in the contract.
 
 ## Events
 
-- **Usage**: Events `Deposit(uint256 amount)` and `Withdraw(uint256 amount)` are emitted after successful deposit and withdrawal operations, respectively.
-- **Effect**: Events provide a transparent record of contract activities, aiding in external monitoring and integration with off-chain applications.
+- **TaskCreated**: Emits when a new task is created.
+  - Parameters: `id` (uint), `content` (string), `completed` (bool).
+
+- **TaskCompleted**: Emits when a task's completion status is toggled.
+  - Parameters: `id` (uint), `completed` (bool).
+
+- **TaskDeleted**: Emits when a task is deleted.
+  - Parameters: `id` (uint).
 
 ## Solidity Version
 
